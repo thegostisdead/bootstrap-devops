@@ -1,15 +1,16 @@
 version: '3'
 services:
    phoenix:
+      environment:
+         PGDATA: /var/lib/postgresql/data/pgdata
+         PGUSER: "$${PGUSER:default_value}"
+         PGPASSWORD: "$${PGPASSWORD:default_value}"
+         PGDATABASE: "$${PGDATABASE:default_value}"
+         PGPORT: "$${PGPORT:5432}"
+         PGHOST: "$${PGHOST:default_value}"
       build:
          # Here we define that it should build from the current directory.
          context: ./backend/hello/
-      environment:
-         PGUSER: postgres
-         PGPASSWORD: postgres
-         PGDATABASE: database_name
-         PGPORT: 5432
-         PGHOST: db
       ports:
          - '4000:4000'
       depends_on:
@@ -18,16 +19,22 @@ services:
       # We use the predefined Postgres image.
       image: postgres:9.6
       environment:
-         # Set user/password for Postgres.
-         POSTGRES_USER: postgres
-         POSTGRES_PASSWORD: postgres
-         # Set a path where Postgres should store the data.
          PGDATA: /var/lib/postgresql/data/pgdata
+         PGUSER: "$${PGUSER:default_value}"
+         PGPASSWORD: "$${PGPASSWORD:default_value}"
+         PGDATABASE: "$${PGDATABASE:default_value}"
+         PGPORT: "$${PGPORT:5432}"
+         PGHOST: "$${PGHOST:localhost}"
       restart: always
       ports:
          - '5432:5432'
       volumes:
          - pgdata:/var/lib/postgresql/data
+   adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
 # Define the volumes.
 volumes:
    pgdata:
