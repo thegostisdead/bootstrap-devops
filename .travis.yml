@@ -14,8 +14,8 @@ deploy:
   provider: elasticbeanstalk
   region: "eu-west-3"
   app: "bootstrap-devops"
-  env: "bootstrapdevops-env"
-  bucket_name: "elasticbeanstalk-eu-west-3-452017505879"
+  env: "Bootstrapdevops-env"
+  bucket_name: "s3-bootstrap-thegostisdead"
   bucket_path: "app"
   on:
     branch: main
