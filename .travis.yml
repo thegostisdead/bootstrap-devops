@@ -9,6 +9,8 @@ before_install:
   - docker build -t frontend ./frontend/nuxt-app/
 script:
   - echo "skipping tests"
+  - docker run -e CI=true -p 8080:3000 frontend
+
 deploy:
   provider: elasticbeanstalk
   region: "eu-west-3"
