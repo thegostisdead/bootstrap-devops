@@ -3,11 +3,11 @@ services:
    phoenix:
       environment:
          PGDATA: /var/lib/postgresql/data/pgdata
-         PGUSER: "$${PGUSER:default_value}"
-         PGPASSWORD: "$${PGPASSWORD:default_value}"
-         PGDATABASE: "$${PGDATABASE:default_value}"
-         PGPORT: "$${PGPORT:5432}"
-         PGHOST: "$${PGHOST:default_value}"
+         PGUSER: "${PGUSER-dorian}"
+         PGPASSWORD: "dorian"
+         PGDATABASE: "${PGDATABASE-test}"
+         PGPORT: "${PGPORT-5432}"
+         PGHOST: "${PGHOST-db}"
       build:
          # Here we define that it should build from the current directory.
          context: ./backend/hello/
@@ -20,11 +20,10 @@ services:
       image: postgres:9.6
       environment:
          PGDATA: /var/lib/postgresql/data/pgdata
-         PGUSER: "$${PGUSER:default_value}"
-         PGPASSWORD: "$${PGPASSWORD:default_value}"
-         PGDATABASE: "$${PGDATABASE:default_value}"
-         PGPORT: "$${PGPORT:5432}"
-         PGHOST: "$${PGHOST:localhost}"
+         POSTGRES_USER: dorian
+         POSTGRES_PASSWORD: dorian
+         POSTGRES_DB: test
+         
       restart: always
       ports:
          - '5432:5432'

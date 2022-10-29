@@ -1,0 +1,18 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t frontend ./frontend/nuxt-app/
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-3"
+  app: "bootstrap-devops"
+  env: "bootstrapdevops-env"
+  bucket_name: "s3-bootstrap-thegostisdead"
+  bucket_path: "app"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
