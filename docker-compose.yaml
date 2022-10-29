@@ -1,39 +1,8 @@
 version: '3'
 services:
-   phoenix:
-      environment:
-         PGDATA: /var/lib/postgresql/data/pgdata
-         PGUSER: "${PGUSER-dorian}"
-         PGPASSWORD: "dorian"
-         PGDATABASE: "${PGDATABASE-test}"
-         PGPORT: "${PGPORT-5432}"
-         PGHOST: "${PGHOST-db}"
+   front:
       build:
          # Here we define that it should build from the current directory.
-         context: ./backend/hello/
+         context: ./frontend/nuxt-app/
       ports:
-         - '4000:4000'
-      depends_on:
-         - db
-   db:
-      # We use the predefined Postgres image.
-      image: postgres:9.6
-      environment:
-         PGDATA: /var/lib/postgresql/data/pgdata
-         POSTGRES_USER: dorian
-         POSTGRES_PASSWORD: dorian
-         POSTGRES_DB: test
-         
-      restart: always
-      ports:
-         - '5432:5432'
-      volumes:
-         - pgdata:/var/lib/postgresql/data
-   adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-# Define the volumes.
-volumes:
-   pgdata:
+         - '8080:3000'
