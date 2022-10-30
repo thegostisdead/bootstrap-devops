@@ -7,7 +7,8 @@ services:
 
 before_install:
   - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
-  - docker build -t front_app ./frontend/nuxt-app/
+  - docker build -t front_app:latest ./frontend/nuxt-app/
+  - docker images 
   - docker tag front_app front_app:latest
   - docker push thegostisdead/front_app:latest
 
