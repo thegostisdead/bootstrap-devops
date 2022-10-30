@@ -5,6 +5,7 @@ node_js: 18
 services:
   - docker
 addons:
+  ssh_known_hosts: ${SERVER_IP_ADDRESS}
   apt:
     packages:
     - sshpass
@@ -18,7 +19,6 @@ before_install:
 
 after_success:
   - eval "$(ssh-agent -s)"
-  - echo -e "Host ${SERVER_IP_ADDRESS}\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - sshpass -p '${SERVER_PASSWORD}' ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_IP_ADDRESS}/deploy.sh
     
 script:
