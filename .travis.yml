@@ -12,15 +12,15 @@ addons:
 
 before_install:
   - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
-  - docker build -t front_app:latest ./frontend/nuxt-app/
-  - docker images 
-  - docker tag front_app:latest thegostisdead/front_app:latest
-  - docker push thegostisdead/front_app:latest
+#  - docker build -t front_app:latest ./frontend/nuxt-app/
+#  - docker images 
+#  - docker tag front_app:latest thegostisdead/front_app:latest
+#  - docker push thegostisdead/front_app:latest
 
 after_success:
   - eval "$(ssh-agent -s)"
-  - sshpass -p '${SERVER_PASSWORD}' ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_IP_ADDRESS} &&
-   docker run -p 8080:8080 --name=frontend -d thegostisdead/front_app:latest
+  - sshpass -p '${SERVER_PASSWORD}' ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_IP_ADDRESS} "
+   docker run -p 8080:8080 --name=frontend -d thegostisdead/front_app:latest"
     
 script:
   - echo "skipping tests"
