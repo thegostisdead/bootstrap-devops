@@ -21,7 +21,8 @@ before_install:
 after_success:  
   - eval "$(ssh-agent -s)"
   - echo -e "Host ${SERVER_IP_ADDRESS}\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-  - sshpass -p '${SERVER_PASSWORD}' ssh -o StrictHostKeyChecking=no root@${SERVER_IP_ADDRESS} "docker run -p 8080:3000 --name=frontend -d thegostisdead/front_app:latest"  
+  - echo ${SERVER_PASSWORD}
+  - sshpass -p '${SERVER_PASSWORD}' ssh -o StrictHostKeyChecking=no root@185.217.127.1 "docker run -p 8080:3000 --name=frontend -d thegostisdead/front_app:latest"  
     
 script:
   - echo "skipping tests"
