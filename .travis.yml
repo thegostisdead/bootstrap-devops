@@ -10,7 +10,7 @@ before_install:
   - docker build -t front_app:latest ./frontend/nuxt-app/
   - docker images 
   - docker tag front_app front_app:latest
-  - docker push thegostisdead/front_app:latest
+  - docker push thegostisdead/front_app
 
 script:
   - echo "skipping tests"
