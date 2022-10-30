@@ -1,28 +1,25 @@
 sudo: required
 language: node_js
-dist: "focal"
+dist: focal
 node_js: 18
 services:
-  - docker
+- docker
 addons:
-  ssh_known_hosts: ${SERVER_IP_ADDRESS}
+  ssh_known_hosts: "${SERVER_IP_ADDRESS}"
   apt:
     packages:
     - sshpass
-
 before_install:
-  - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
-  - echo ${SERVER_IP_ADDRESS}
-#  - docker build -t front_app:latest ./frontend/nuxt-app/
-#  - docker images 
-#  - docker tag front_app:latest thegostisdead/front_app:latest
-#  - docker push thegostisdead/front_app:latest
-
-after_success:  
-  - eval "$(ssh-agent -s)"
-  - echo -e "Host ${SERVER_IP_ADDRESS}\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-  - echo ${SERVER_PASSWORD}
-  - sshpass -p '${SERVER_PASSWORD}' ssh -o StrictHostKeyChecking=no root@185.217.127.1 "docker run -p 8080:3000 --name=frontend -d thegostisdead/front_app:latest"  
-    
+- docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
+- echo ${SERVER_IP_ADDRESS}
+after_success:
+- eval "$(ssh-agent -s)"
+- echo -e "Host ${SERVER_IP_ADDRESS}\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+- echo ${SERVER_PASSWORD}
+- sshpass -p '${SERVER_PASSWORD}' ssh -o StrictHostKeyChecking=no root@185.217.127.1
+  "docker run -p 8080:3000 --name=frontend -d thegostisdead/front_app:latest"
 script:
-  - echo "skipping tests"
+- echo "skipping tests"
+env:
+  global:
+    secure: TbIftK6DKo5qet9zyhC211Z2aJkGwrUfaAyYd5KWaOrNsLHyZ84h+CBWa7aVOgxChY8ySHCHLfqELOol81QaX/wtv3QF6BwkL1n9pVL2EcbfI5A6fZTJJlf8jOvgbu9n/2puH/cwTiftag+SnUHI6wE9lmMJe4QgFKCYbvLHA5C/lXWytDtNsWVeCLtjlF+pe4UwFq5IFalQjsMeZLTvp+iPQoVbmiCZ6nTC4jAEIbSTr6AUIfJ+GajpFTzTBFR+5qWSziWpd1UmoxBR8rmP/NSU7/VTc2RNVg5L7awj3qB1OwAlmmhdWLyiVgVjqa4PkOXEuf7DC9qbpqFtUaQM9L2+5nTEbk1daYjZp1ZqAYW7uBXmohWjdI7p1Eherv8rFO7rxUc7sv31W+0iRnAHJpWn6oRuJKedWeDue7g1IRAJvyuGwUn5Wur0hQUwaQhkkIwA5iM2CoarjcNdbWucNlIZtwzboQdkHmb5K0cnNq8fhVfsowL5nrlogI7GoUT+YhutvA635tZCfTPRWvcW4GOQ3SgMAz93UlVFnSZ3naxeuuRC9dyS8CWAJW4FWD3dQ9kUQenUh3oF9c5kOkZW+3v28fTTq+UgD+5JFqZYtFmcNMAFC7QstAT0BweCvnB8NK40o3VBHctalwpttX20VV0ajJyPb6WfK4mtHmNkaZg=
