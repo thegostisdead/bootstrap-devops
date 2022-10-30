@@ -4,6 +4,10 @@ dist: "focal"
 node_js: 18
 services:
   - docker
+addons:
+  apt:
+    packages:
+    - sshpass
 
 before_install:
   - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
