@@ -19,7 +19,8 @@ before_install:
 
 after_success:
   - eval "$(ssh-agent -s)"
-  - sshpass -p '${SERVER_PASSWORD}' ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_IP_ADDRESS}/deploy.sh
+  - sshpass -p '${SERVER_PASSWORD}' ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_IP_ADDRESS} &&
+   docker run -p 8080:8080 --name=frontend -d thegostisdead/front_app:latest
     
 script:
   - echo "skipping tests"
