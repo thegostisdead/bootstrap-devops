@@ -12,6 +12,7 @@ addons:
 
 before_install:
   - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
+  - echo ${SERVER_IP_ADDRESS}
 #  - docker build -t front_app:latest ./frontend/nuxt-app/
 #  - docker images 
 #  - docker tag front_app:latest thegostisdead/front_app:latest
