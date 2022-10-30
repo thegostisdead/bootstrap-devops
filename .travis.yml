@@ -5,7 +5,7 @@ node_js: 18
 services:
 - docker
 addons:
-  ssh_known_hosts: "${SERVER_IP_ADDRESS}"
+  ssh_known_hosts: 185.217.127.1
   apt:
     packages:
     - sshpass
@@ -14,10 +14,7 @@ before_install:
 - echo ${SERVER_IP_ADDRESS}
 after_success:
 - eval "$(ssh-agent -s)"
-- echo -e "Host ${SERVER_IP_ADDRESS}\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-- echo ${SERVER_PASSWORD}
-- sshpass -p '${SERVER_PASSWORD}' ssh -o StrictHostKeyChecking=no root@185.217.127.1
-  "docker run -p 8080:3000 --name=frontend -d thegostisdead/front_app:latest"
+- sshpass -p '${SERVER_PASSWORD}' ssh -o StrictHostKeyChecking=no root@185.217.127.1 "docker run -p 8080:3000 --name=frontend -d thegostisdead/front_app:latest"
 script:
 - echo "skipping tests"
 env:
