@@ -7,7 +7,7 @@ services:
          PGPASSWORD: "dorian"
          PGDATABASE: "${PGDATABASE-test}"
          PGPORT: "${PGPORT-5432}"
-         PGHOST: "${PGHOST-db}"
+         PGHOST: "${PGHOST-db}"dzcsccc
       build:
          # Here we define that it should build from the current directory.
          context: ./backend/hello/
